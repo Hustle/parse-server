@@ -174,10 +174,10 @@ export class MongoStorageAdapter implements StorageAdapter {
           delete this.connectionPromise;
           return;
         }
-        database.on('error', () => {
+        client.on('error', () => {
           delete this.connectionPromise;
         });
-        database.on('close', () => {
+        client.on('close', () => {
           delete this.connectionPromise;
         });
         this.client = client;
