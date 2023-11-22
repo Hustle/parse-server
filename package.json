@@ -106,6 +106,7 @@
     "start": "node ./bin/parse-server",
     "prettier": "prettier --write {src,spec}/**/*.js",
     "prepare": "npm run build",
+    "prepack": "npm run build",
     "postinstall": "node -p 'require(\"./postinstall.js\")()'"
   },
   "engines": {
