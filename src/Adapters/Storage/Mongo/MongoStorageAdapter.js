@@ -494,6 +494,7 @@ export class MongoStorageAdapter implements StorageAdapter {
       .then((collection) =>
         collection.insertOne(mongoObject, transactionalSession)
       )
+      .then(() => ({ ops: mongoObject }))
       .catch((error) => {
         if (error.code === 11000) {
           // Duplicate value
@@ -534,8 +535,8 @@ export class MongoStorageAdapter implements StorageAdapter {
       })
       .catch((err) => this.handleError(err))
       .then(
-        ({ result }) => {
-          if (result.n === 0) {
+        ({ deletedCount }) => {
+          if (deletedCount === 0) {
             throw new Parse.Error(
               Parse.Error.OBJECT_NOT_FOUND,
               'Object not found.'
